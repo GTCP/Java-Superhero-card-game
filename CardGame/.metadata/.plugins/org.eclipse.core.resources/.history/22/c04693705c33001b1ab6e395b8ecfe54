@@ -1,0 +1,31 @@
+public class Atributo{
+	private String nombre;
+	private double valor;	
+	public Atributo(String nombre, double valor) { //CONSTRUCTOR CON VALORES DE LOS PARAMETROS NOMBRE Y VALOR
+		this.nombre=nombre;
+		this.valor = valor;
+	}	
+	public String get_nombre() { //DEVUELVE NOMBRE
+		return nombre;
+	}
+	public double get_valor() {
+		return valor;
+	}
+	public void set_valor(double valor) {
+		this.valor = valor;
+	}	
+	public boolean equals(Object o) {
+		try {
+			Atributo otro = (Atributo) o;
+			return get_nombre().equals(otro.get_nombre());
+		} catch (Exception e) {
+			return false;
+		}
+	}	
+	public String getAtributo(String nombreAtributo) {
+		if(this.get_nombre().equals(nombreAtributo)){
+			return this.get_nombre();
+		}
+		return "";
+	}	
+}

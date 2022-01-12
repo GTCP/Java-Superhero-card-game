@@ -1,0 +1,21 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class EstrategiaAmbicioso implements EstrategiaDeJuego{
+
+	public Atributo definirEstrategia(Carta c) {
+		Atributo atributoFinal= new Atributo ("Nombre",0);
+        ArrayList<String> aux= new ArrayList<String>();
+        aux=c1.getArrayAtributos();
+        for (String atributo : aux) {
+
+        	Atributo atributoAux=c1.getAtributoNombre(atributo);
+            if(atributoAux.get_valor()>atributoFinal.getValor()){
+                atributoFinal=atributoAux;
+            }
+        }
+
+        return atributoFinal;
+	}
+}

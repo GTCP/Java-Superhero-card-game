@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class EstrategiaTimbero implements EstrategiaDeJuego {
+	
+	public Atributo definirEstrategia(Carta c) {
+
+		ArrayList<String> listaNombreAtributos= new ArrayList<String>();
+		listaNombreAtributos=c.get_lista_atributos();
+	    Collections.shuffle(listaNombreAtributos);
+	    return c.get_atributo_nombre(listaNombreAtributos.get(0));
+	}
+}

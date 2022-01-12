@@ -1,0 +1,7 @@
+package Estrategia;
+import Atributo;
+import Carta;
+
+public interface EstrategiaDeJuego {
+	public Atributo definirEstrategia(Carta c);
+}

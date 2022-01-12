@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<item key="selection" value="getCartaElegida"/>
+		<list key="findhistory">
+			<item value="getCartaElejida"/>
+			<item value="repartir_pocimas"/>
+			<item value="mazo"/>
+			<item value="get_nombre"/>
+			<item value="elegirEstrategia"/>
+			<item value="obtener_valor_atributo"/>
+			<item value="get_atributo_nombre"/>
+			<item value="get_valor_atributo"/>
+			<item value="obtenerNombresDeAtributos"/>
+			<item value="get_lista_atributos"/>
+			<item value="setPocima"/>
+			<item value="get_atributo"/>
+			<item value="getAtributo"/>
+			<item value="getNombre"/>
+			<item value="set_estrategia"/>
+		</list>
+		<list key="replacehistory">
+			<item value="getCartaElegida"/>
+			<item value="obtener_nombre"/>
+			<item value="obtener_valor_atributo_por_nombre"/>
+			<item value="obtener_atributo_por_nombre"/>
+			<item value="obtener_valor_atributo"/>
+			<item value="obtener_nombres_atributos"/>
+			<item value="obtenerNombresDeAtributos"/>
+			<item value="atributos"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="760"/>
+		<item key="DIALOG_Y_ORIGIN" value="243"/>
+		<item key="DIALOG_WIDTH" value="284"/>
+		<item key="DIALOG_HEIGHT" value="493"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

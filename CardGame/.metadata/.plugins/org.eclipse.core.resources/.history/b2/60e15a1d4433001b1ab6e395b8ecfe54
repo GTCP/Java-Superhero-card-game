@@ -1,0 +1,18 @@
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class EstrategiaObstinado implements EstrategiaDeJuego {
+	private String atributo;
+
+	public EstrategiaObstinado(String atributo) {
+		this.atributo = atributo;
+	}
+
+	public Atributo  definirEstrategia(Carta c) {
+		return c.get_atributo_nombre(atributo);
+
+	}
+	
+}

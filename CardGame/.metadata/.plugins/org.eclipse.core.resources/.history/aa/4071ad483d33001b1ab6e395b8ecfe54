@@ -1,0 +1,14 @@
+
+public class EstrategiaTimbero implements EstrategiaDeJuego {
+	
+	public String definirEstrategia(Carta c) {
+		Atributo atributo = null;
+		
+		int posAtributo = (int)(Math.random()*(c.get_atributos().size()));
+		atributo = c.get_atributos().get(posAtributo);
+		
+	//	return atributo;
+		return atributo.get_nombre();
+	}
+
+}

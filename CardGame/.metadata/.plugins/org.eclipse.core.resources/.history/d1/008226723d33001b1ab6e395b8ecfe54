@@ -1,0 +1,7 @@
+
+public interface EstrategiaDeJuego {
+	//public Atributo definirEstrategia(Carta c);
+	public String definirEstrategia(Carta c);
+}
+
+	

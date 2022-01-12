@@ -1,0 +1,109 @@
+import java.util.ArrayList;
+public class Carta {
+	private String nombre;
+	private ArrayList <Atributo> atributos;
+	private Pocima pocima;
+	public Carta(String nombre, ArrayList<Atributo> atributos) {
+		this.nombre = nombre;
+		this.atributos = atributos;
+		this.pocima = null;
+	}
+	public Pocima getPocima() {
+		return this.pocima;
+	}
+	public void setPocima(Pocima pocima) {
+		this.pocima = pocima;
+	}
+	public String get_nombre() {
+		return this.nombre;
+	}
+	public double get_valor_atributo(String nombreAtributo) {
+		Atributo atributo = null;
+		int valor = 0; 
+		for (int i = 0; i < atributos.size(); i++) {
+			atributo = atributos.get(i);
+			if (atributo.get_nombre().equals(nombreAtributo)) {
+				if(pocima == null) {
+					return atributo.get_valor();
+				}
+				else {	
+					return pocima.agregarPocima(atributo);
+				}
+			}
+		}
+		return valor;
+	}
+	public ArrayList<String> get_lista_atributos() {
+        ArrayList<String> aux= new ArrayList<String>();
+        for (Atributo atributo : atributos) {
+            aux.add(atributo.get_nombre());
+        }
+        return aux;
+    }
+	public Atributo get_atributo_nombre(String atributo){
+        for (Atributo a : atributos) {
+            if(a.get_nombre().equals(atributo)){
+                return a;
+            }
+        }
+        return null;
+    }
+	
+//	public double get_valor_atributo(String nombre) {
+//		return a.get_valor();
+//	} 
+	public boolean equals(Object o) {	
+		try {
+	        Carta auxiliar = (Carta) o;
+	        if (this.get_lista_atributos().size() == (auxiliar.get_lista_atributos().size())) {
+	            for (int i = 0; i < this.get_lista_atributos().size(); i++) {
+	                if (!this.atributos.get(i).equals(auxiliar.atributos.get(i))) {
+	                    return false;
+	                }
+	            }
+	            return true;
+	        }
+	        return false;
+
+	    } catch (Exception exp) {
+	        return false;
+	    }
+	}
+
+	public boolean verificar(Carta c) {
+		if(this.atributos.size()==c.atributos.size()) {
+			for(int i=0;i<atributos.size();i++){
+				if (!this.atributos.get(i).equals(c.atributos.get(i)))
+					return false;
+				}
+			}	
+		return true;	
+	}
+/*		public boolean verificar(Carta c) {
+		int contador = 0;
+		if(this.atributos.size()==c.atributos.size()) {
+			for(int i=0;i<this.atributos.size();i++) {
+				for (int j = 0; j < c.atributos.size(); j++) {
+					if(this.atributos.get(i).get_nombre().equals(c.atributos.get(j).get_nombre())) {
+						contador++;
+					}
+				}
+			}
+			if (this.atributos.size() == contador) {
+				return true;
+			}
+		}
+		return false;
+	}
+*/
+	public Atributo elegirEstrategia(EstrategiaDeJuego estrategia) {
+		return estrategia.definirEstrategia(this);
+	}
+	public String toString(String atributo) {
+        String resultado= this.get_atributo_nombre(atributo).toString();
+        if(this.pocima!=null){
+            resultado+= " Se aplico Pocima "+ this.getPocima().getNombre()+" valor resultante "+ this.get_valor_atributo(atributo);           
+        }
+        return resultado;
+   }
+}

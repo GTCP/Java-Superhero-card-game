@@ -1,0 +1,7 @@
+public abstract class Pocima {
+	protected String nombre;
+	public abstract double agregarPocima(Atributo atributo);
+	public String getNombre() {
+		return nombre;
+	}
+}

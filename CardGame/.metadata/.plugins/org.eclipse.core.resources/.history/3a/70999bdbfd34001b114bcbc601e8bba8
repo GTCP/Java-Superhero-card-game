@@ -1,0 +1,142 @@
+import java.util.ArrayList;
+public class Juego {
+	private Jugador jugador1;
+	private Jugador jugador2;
+	private Jugador jugadorMano;
+	private Jugador jugadorSinMano;
+	private Mazo mazo;
+	private int maximoRondas;
+	private ArrayList<Pocima> pocimas;
+	public Juego(Jugador jugador1, Jugador jugador2, Mazo mazo, int maximoRondas) {
+		this.jugador1 = jugador1;
+		this.jugador2 = jugador2;
+		this.mazo = mazo;
+		this.maximoRondas = maximoRondas;
+		this.pocimas = new ArrayList<Pocima>();
+		this.jugadorMano=jugador1;
+		this.jugadorSinMano=jugador2;
+	}
+	public void jugar() {
+		System.out.println("");
+		System.out.println("--------------------------------Arranca el juego--------------------------------");
+		System.out.println("");
+
+		int rondasJugadas=1;	
+		if(pocimas != null) {
+			repartir_pocimas();
+		}
+		repartir();
+		while(!verificarPartida(rondasJugadas)) {
+			System.out.println("");
+			System.out.println("--------------- Ronda "+rondasJugadas+ " ---------------");
+			ronda();	
+			rondasJugadas++;
+		}
+	} 
+	
+	public Jugador devolver_jugador1() {
+		return this.jugador1;
+	}
+	public Jugador devolver_jugador2() {
+		return this.jugador2;
+	}
+	public void repartir() {
+		for (int i = 0; i < this.mazo.getCantidadCartas(); i++) {
+			jugador1.agregar_carta(this.mazo.getCarta());
+			this.mazo.eliminarCarta();
+			i++;
+			if(i < this.mazo.getCantidadCartas()) {
+				jugador2.agregar_carta(this.mazo.getCarta());
+				this.mazo.eliminarCarta();
+			}
+		}
+	}
+	public void agregar_pocima(Pocima pocima) {
+		this.pocimas.add(pocima);
+	}
+	public void repartir_pocimas() {
+		Pocima pocima;
+		for (int i = 0; i < pocimas.size(); i++) {
+			pocima = pocimas.get(i);
+			mazo.getCartaElejida(i).setPocima(pocima);
+		}
+	}
+	private boolean verificarPartida(int rondasJugadas) {
+		if(rondasJugadas > maximoRondas) {
+			ganador_juego();
+			return true;
+		} else if((jugador1.getCantidadCartas()==0)||(jugador2.getCantidadCartas()==0)) {
+			ganador_juego();
+			return true;
+		} else if (rondasJugadas < maximoRondas){
+			return false;
+		}
+		return false;
+	}
+	private void ganador_juego() {
+		if(jugador1.getCantidadCartas() > jugador2.getCantidadCartas()) {
+			System.out.println("--------------- Ganador  ---------------");
+			System.out.println("Ganó el juego: "+jugador1.getNombre());		
+		}
+		else if (jugador1.getCantidadCartas() < jugador2.getCantidadCartas()) {
+			System.out.println("--------------- Ganador  ---------------");
+			System.out.println("Ganó el juego: "+jugador2.getNombre());		
+		} else {
+			System.out.println("--------------- Empate  ---------------");
+			System.out.println("Hubo Empate!");		
+		}
+		System.out.println("");
+		System.out.println("");
+		System.out.println("--------------------------------Termino el juego--------------------------------");
+		System.out.println("");
+		System.out.println("");
+
+	}	
+	private void ronda() {
+		Atributo atributoEstrategia = jugadorMano.get_estrategia(jugadorMano.getCarta());				
+		double valorAtriPocimadoJugMano = jugadorMano.getCarta().obtener_valor_atributo_por_nombre(atributoEstrategia.get_nombre());
+		double valorAtriPocimadoJugSinMano = jugadorSinMano.getCarta().obtener_valor_atributo(atributoEstrategia.get_nombre());
+		System.out.println("El jugador "+jugadorMano.getNombre()+" selecciona competir por el atributo "+atributoEstrategia.get_nombre()+"\n"+"La carta del jugador "+jugadorMano.getNombre()+" es "+jugadorMano.getCarta().get_nombre()+" con "+jugadorMano.getCarta().toString(atributoEstrategia.get_nombre()));
+	        System.out.println("La carta del jugador "+jugadorSinMano.getNombre()+" es "+jugadorSinMano.getCarta().get_nombre()+" con "+jugadorSinMano.getCarta().toString(atributoEstrategia.get_nombre()));
+			ganadorRonda(valorAtriPocimadoJugMano, valorAtriPocimadoJugSinMano, jugadorMano, jugadorSinMano, jugadorMano.getCarta(), jugadorSinMano.getCarta());
+	}
+	private void ganadorRonda(double valorAtriJugMano, double valorAtriJugSinMano, Jugador jugadorMano, Jugador jugadorSinMano, 
+			Carta cartaJugadorMano, Carta cartaJugadorSinMano) {	
+		if (valorAtriJugMano > valorAtriJugSinMano) {	
+			divisionCartasFinalRonda(jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano, false);			
+			System.out.println("Gana la ronda "+jugadorMano.getNombre()+"("+jugadorMano.getNombre()+" queda con "+jugadorMano.getCantidadCartas()+
+					" cartas y "+jugadorSinMano.getNombre()+" posee ahora "+jugadorSinMano.getCantidadCartas()+")");
+			cambiarTurno(jugadorMano);
+		} else if (valorAtriJugMano < valorAtriJugSinMano) {
+			divisionCartasFinalRonda(jugadorSinMano, jugadorMano, cartaJugadorSinMano, cartaJugadorMano, false);
+			System.out.println("Gana la ronda "+jugadorSinMano.getNombre()+"("+jugadorSinMano.getNombre()+" queda con "+jugadorSinMano.getCantidadCartas()+
+					" cartas y "+jugadorMano.getNombre()+" posee ahora "+jugadorMano.getCantidadCartas()+")");
+			cambiarTurno(jugadorSinMano);
+		} else {
+			divisionCartasFinalRonda(jugadorMano, jugadorSinMano, cartaJugadorMano, cartaJugadorSinMano, true);
+			System.out.println("Hubo Empate!");
+		}
+	}
+	private void divisionCartasFinalRonda(Jugador jugador1, Jugador jugador2, Carta cartaJugador1, Carta cartaJugador2, boolean empate) {
+		if (!empate) {
+			jugador1.agregar_carta(cartaJugador1);
+			jugador1.agregar_carta(cartaJugador2);
+			jugador1.eliminar_carta();
+			jugador2.eliminar_carta();		
+		} else {
+			jugador1.agregar_carta(cartaJugador1);
+			jugador1.eliminar_carta();
+			jugador2.agregar_carta(cartaJugador2);
+			jugador2.eliminar_carta();		
+		}
+	}
+	private void cambiarTurno(Jugador jugador) {
+		if (jugador.equals(jugador1)) {
+			jugadorMano = jugador1;
+			jugadorSinMano = jugador2;	
+		} else if (jugador.equals(jugador2)) {
+			jugadorMano = jugador2;
+			jugadorSinMano = jugador1;
+		}
+	}
+}

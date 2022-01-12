@@ -1,0 +1,31 @@
+
+import java.util.ArrayList;
+
+public class EstrategiaObstinado implements EstrategiaDeJuego {
+	private String atributo;
+
+	public EstrategiaObstinado(String atributo) {
+		this.atributo = atributo;
+	}
+
+	public String  definirEstrategia(Carta c) {
+	//	Atributo atributo = null;
+	//	ArrayList<Atributo> atributos = c.get_atributos();
+		
+		//for (int i = 0; i < atributos.size(); i++) {
+		//	if (atributos.get(i).get_nombre().equals(this.atributo)) {
+			//	atributo = atributos.get(i);
+		//	}
+	//	}
+		
+		ArrayList<String> aux= new ArrayList<String>();
+        aux=c1.getArrayAtributos();
+        Collections.shuffle(aux);
+        return c1.getAtributoNombre(aux.get(0));
+        
+        
+	//	return atributo;
+		return atributo.get_nombre();
+	}
+	
+}

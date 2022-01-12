@@ -1,0 +1,9 @@
+public class EstrategiaObstinado implements EstrategiaDeJuego {
+	private String nombreAtributo;
+	public EstrategiaObstinado(String atributo) {
+		this.atributo = atributo;
+	}
+	public Atributo  definirEstrategia(Carta c) {
+		return c.get_atributo_nombre(atributo);
+	}
+}
